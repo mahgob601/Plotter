@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QLabel, \
     QDesktopWidget
+import numpy as np
 from PyQt5.QtGui import QIcon
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -9,9 +10,11 @@ from PyQt5.QtCore import pyqtSlot
 
 class App(QMainWindow):
 
+
     def __init__(self):
         super().__init__()
         self.title = 'Function Plotter'
+        self.noSamples = 20
         self.initUI()
 
     def center(self):
@@ -88,17 +91,48 @@ class App(QMainWindow):
     def on_click_plot(self):
         eqn = self.FuncTextbox.text()
         minVal = self.MinTextbox.text()
+        maxVal = self.MaxTextbox.text()
 
 
-        if(eqn == ""):
+        if(eqn == "" or minVal == "" or maxVal == ""):
             msg = QMessageBox()
-            msg.setText("Empty Value: You must enter an equation")
+            msg.setText("Empty Value: You must enter the equation, min and max values")
             msg.setWindowTitle("Error")
             msg.exec_()
         else:
+            minVal = float(minVal)
+            maxVal = float(maxVal)
+            print(minVal, type(minVal))
+            stepSize = (maxVal - minVal) / self.noSamples    # taking 20 samples
 
 
+            xValues = (np.arange(minVal,maxVal,stepSize)).tolist()
+
+
+            print(xValues)
+            self.f_x(xValues, eqn)
+            print(eqn)
+
+    def f_x(self, xValues, eqn):
+        if("^" in eqn):
+            eqn = eqn.replace("^","**")
         print(eqn)
+
+        print("Here we go")
+        yValues = [0] * self.noSamples
+        print(yValues)
+
+
+        for i in range(self.noSamples):
+            temp = eval(eqn,{'x':xValues[i]})
+            yValues[i] = temp
+        print(yValues)
+
+
+
+
+
+
 
 
 
