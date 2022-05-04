@@ -7,7 +7,11 @@ from matplotlib.figure import Figure
 from PyQt5.QtGui import QIcon
 import matplotlib.pyplot as plt
 
-from PyQt5.QtCore import pyqtSlot
+import squarify
+
+
+
+
 
 
 class App(QMainWindow):
@@ -30,8 +34,15 @@ class App(QMainWindow):
         self.center()
         self.resize(800,500)
 
-        canvas = Canvas(self, width=8, height=4)
-        canvas.move(0, 0)
+        self.figure = Figure(figsize=(5, 4), dpi=100)
+
+        self.canvas = FigureCanvas(self.figure)
+        #self.setCentralWidget(self.canvas)
+
+
+
+
+
 
         #Create Label
         self.Funclabel = QLabel(self)
@@ -84,14 +95,8 @@ class App(QMainWindow):
 
         # connect button to function on_click
         self.button.clicked.connect(lambda x: self.on_click_plot())
-        self.show()
+        self.showMaximized()
 
-    # @pyqtSlot()
-    # def syntCheck(self):
-    #     textboxValue = self.textbox.text()
-    #     QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + textboxValue, QMessageBox.Ok,
-    #                          QMessageBox.Ok)
-    #     self.textbox.setText("")
 
     def on_click_plot(self):
         eqn = self.FuncTextbox.text()
@@ -130,6 +135,7 @@ class App(QMainWindow):
             for i in range(self.noSamples):
                 temp = eval(eqn,{'x':xValues[i]})
                 yValues[i] = temp
+            self.plot(xValues,yValues)
             print(yValues)
         except:
             msg1 = QMessageBox()
@@ -137,15 +143,12 @@ class App(QMainWindow):
             msg1.setWindowTitle("Error")
             msg1.exec_()
 
+    def plot(self, xValues, yValues):
+        self.figure.clear()
+        ax = self.figure.add_subplot(111,xlabel = "x", ylabel = "f(x)")
 
-
-
-
-
-
-
-
-
+        ax.plot(xValues,yValues,"bo")
+        self.canvas.draw()
 
 
 
