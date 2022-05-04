@@ -111,22 +111,28 @@ class App(QMainWindow):
 
             print(xValues)
             self.f_x(xValues, eqn)
-            print(eqn)
+
 
     def f_x(self, xValues, eqn):
         if("^" in eqn):
             eqn = eqn.replace("^","**")
         print(eqn)
 
-        print("Here we go")
         yValues = [0] * self.noSamples
-        print(yValues)
 
 
-        for i in range(self.noSamples):
-            temp = eval(eqn,{'x':xValues[i]})
-            yValues[i] = temp
-        print(yValues)
+        try:
+            for i in range(self.noSamples):
+                temp = eval(eqn,{'x':xValues[i]})
+                yValues[i] = temp
+            print(yValues)
+        except:
+            msg1 = QMessageBox()
+            msg1.setText("Incorrect Argument: Check your values and operands")
+            msg1.setWindowTitle("Error")
+            msg1.exec_()
+
+
 
 
 
