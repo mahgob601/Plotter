@@ -2,9 +2,11 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QLabel, \
     QDesktopWidget
 import numpy as np
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
 from PyQt5.QtGui import QIcon
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
 from PyQt5.QtCore import pyqtSlot
 
 
@@ -27,6 +29,9 @@ class App(QMainWindow):
         self.setWindowTitle(self.title)
         self.center()
         self.resize(800,500)
+
+        canvas = Canvas(self, width=8, height=4)
+        canvas.move(0, 0)
 
         #Create Label
         self.Funclabel = QLabel(self)
