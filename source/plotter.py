@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
         self.FuncTextBox.setObjectName("FuncTextBox")
 
         self.Flabel = QtWidgets.QLabel(self.centralwidget)
-        self.Flabel.setGeometry(QtCore.QRect(40, 20, 120, 13))
+        self.Flabel.setGeometry(QtCore.QRect(40, 20, 47, 13))
         self.Flabel.setMinimumSize(QtCore.QSize(0, 0))
         self.Flabel.setObjectName("Flabel")
 
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
 
 
         self.MaxLabel = QtWidgets.QLabel(self.centralwidget)
-        self.MaxLabel.setGeometry(QtCore.QRect(200, 150, 47, 13))
+        self.MaxLabel.setGeometry(QtCore.QRect(200, 150, 43, 43))
         self.MaxLabel.setObjectName("MaxLabel")
 
 
@@ -72,7 +72,7 @@ class Ui_MainWindow(object):
         self.Flabel.setText(_translate("MainWindow", "Function"))
         self.MinLabel.setText(_translate("MainWindow", "Min"))
         self.MaxLabel.setText(_translate("MainWindow", "Max"))
-        self.MaxLabel.setFont(16)
+        #self.MaxLabel.setFont(16)
 
         self.plotButton.setText(_translate("MainWindow", "Plot"))
 

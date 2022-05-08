@@ -37,7 +37,7 @@ class App(QMainWindow):
         self.figure = Figure(figsize=(5, 4), dpi=100)
 
         self.canvas = FigureCanvas(self.figure)
-        #self.setCentralWidget(self.canvas)
+        self.setCentralWidget(self.canvas)
 
 
 
