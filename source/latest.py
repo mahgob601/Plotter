@@ -156,12 +156,6 @@ class Ui_MainWindow(object):
                 msg.exec_()
 
 
-
-
-
-
-
-
     def f_x(self, xValues, eqn):
         if("^" in eqn):
             eqn = eqn.replace("^","**")
@@ -177,7 +171,7 @@ class Ui_MainWindow(object):
             print(yValues)
         except:
             msg1 = QMessageBox()
-            msg1.setText("Incorrect Argument: Check your values and operands")
+            msg1.setText("Incorrect Function: Check function format and variables")
             msg1.setWindowTitle("Error")
             msg1.exec_()
 
