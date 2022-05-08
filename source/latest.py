@@ -10,9 +10,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
+import numpy as np
 
 
 class Ui_MainWindow(object):
+    def __init__(self):
+        self.noSamples = 20
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(862, 551)
@@ -135,18 +138,28 @@ class Ui_MainWindow(object):
             msg.setText("Empty Value: You must enter the equation, min and max values")
             msg.setWindowTitle("Error")
             msg.exec_()
+
+
         else:
-            minVal = float(minVal)
-            maxVal = float(maxVal)
-            print(minVal, type(minVal))
-            stepSize = (maxVal - minVal) / self.noSamples    # taking 20 samples
+            try:
+                minVal = float(minVal)
+                maxVal = float(maxVal)
+                print(minVal, type(minVal))
+                stepSize = (maxVal - minVal) / self.noSamples    # taking 20 samples
+                xValues = (np.arange(minVal, maxVal, stepSize)).tolist()
+                print(xValues)
+                self.f_x(xValues, eqn)
+            except:
+                msg = QMessageBox()
+                msg.setText("Incorrect Value of min/max")
+                msg.setWindowTitle("Error")
+                msg.exec_()
 
 
-            xValues = (np.arange(minVal,maxVal,stepSize)).tolist()
 
 
-            print(xValues)
-            self.f_x(xValues, eqn)
+
+
 
 
     def f_x(self, xValues, eqn):
