@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.plotButton.clicked.connect(lambda x: self.on_click_plot())
+        self.plotButton.clicked.connect(lambda x: self.check_prepare())
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
@@ -125,7 +125,7 @@ class Ui_MainWindow(object):
         self.plotButton.setText(_translate("MainWindow", "Plot"))
         
         
-    def on_click_plot(self):
+    def check_prepare(self):
         eqn = self.FuncTB.toPlainText()
         minVal = self.MinTB.toPlainText()
         maxVal = self.MaxTB.toPlainText()
@@ -145,8 +145,8 @@ class Ui_MainWindow(object):
                 minVal = float(minVal)
                 maxVal = float(maxVal)
                 print(minVal, type(minVal))
-                stepSize = (maxVal - minVal) / self.noSamples    # taking 20 samples
-                xValues = (np.arange(minVal, maxVal, stepSize)).tolist()
+                stepSize = (maxVal - minVal + 1) / self.noSamples    # taking 20 samples
+                xValues = (np.arange(minVal, maxVal+1, stepSize)).tolist()
                 print(xValues)
                 self.f_x(xValues, eqn)
             except:
@@ -162,18 +162,21 @@ class Ui_MainWindow(object):
         print(eqn)
 
         yValues = [0] * self.noSamples
-
-
         try:
             for i in range(self.noSamples):
                 temp = eval(eqn,{'x':xValues[i]})
                 yValues[i] = temp
             print(yValues)
+            #self.plot(xValues,yValues)
         except:
             msg1 = QMessageBox()
             msg1.setText("Incorrect Function: Check function format and variables")
             msg1.setWindowTitle("Error")
             msg1.exec_()
+
+    #def plot(self,xValues,yValues):
+
+
 
     
 
