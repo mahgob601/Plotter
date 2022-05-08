@@ -55,7 +55,7 @@ class Ui_MainWindow(object):
 "color: rgb(28, 12, 255)")
         self.MinLabel.setObjectName("MinLabel")
         self.FuncTB = QtWidgets.QTextEdit(self.containerWidget)
-        self.FuncTB.setGeometry(QtCore.QRect(10, 70, 291, 41))
+        self.FuncTB.setGeometry(QtCore.QRect(10, 50, 291, 41))
         self.FuncTB.setStyleSheet("font: 12pt \"MS Shell Dlg 2\";")
         self.FuncTB.setObjectName("FuncTB")
 
